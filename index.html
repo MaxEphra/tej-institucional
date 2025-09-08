@@ -1,0 +1,2569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEJ HOLDING LLC - Inovações Inteligentes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            overflow-x: hidden;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Cores atualizadas com gradiente azul reluzente */
+        :root {
+            --gradient-blue: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa);
+            --gradient-blue-reverse: linear-gradient(135deg, #60a5fa, #3b82f6, #1e40af);
+            --gradient-text: linear-gradient(135deg, #1e40af, #3b82f6);
+            --accent-color: #c89b3c;
+            --light-color: #f5f5f5;
+            --dark-color: #222;
+        }
+        
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header e navegação */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+        
+        /* Seção Hero com vídeo */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        .video-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .custom-video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(59, 130, 246, 0.5);
+        }
+        
+        .typed-text {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            min-height: 70px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient-blue);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn:hover {
+            background: var(--gradient-blue-reverse);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+        
+        /* Seções comuns */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: var(--gradient-blue);
+        }
+        
+        /* Sobre */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .about-text p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* NOVA SEÇÃO - Diferenciais (adicionada após Sobre Nós) */
+        .differentials {
+            background-color: var(--light-color);
+        }
+        
+        .differentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .differential-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .differential-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .differential-icon {
+            font-size: 2.5rem;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+        
+        .differential-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .differential-item p {
+            line-height: 1.6;
+            color: #65748b;
+        }
+        
+        /* Serviços */
+        .services {
+            background-color: var(--light-color);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 350px;
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .service-item:hover .service-image {
+            transform: scale(1.1);
+        }
+        
+        .service-overlay h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .service-overlay p {
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: #000;
+            margin: 40px auto;
+            max-width: 900px;
+            border-radius: 10px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1rem;
+            color: #fff;
+            cursor: pointer;
+            background: #ff0000;
+            border: none;
+            font-weight: bold;
+            z-index: 2001;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+        
+        .modal-header {
+            margin-bottom: 30px;
+            text-align: center;
+            padding-right: 60px;
+        }
+        
+        .modal-header h2 {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+        }
+        
+        .modal-body {
+            line-height: 1.8;
+        }
+        
+        .modal-body h3 {
+            font-size: 1.5rem;
+            margin: 25px 0 15px;
+            color: var(--accent-color);
+        }
+        
+        .modal-body p {
+            margin-bottom: 15px;
+        }
+        
+        .modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-body li {
+            margin-bottom: 10px;
+        }
+        
+        /* Portfólio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover .portfolio-image {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-overlay p {
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        /* Contato */
+        .contact {
+            background-color: var(--light-color);
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2rem;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gradient-blue);
+        }
+        
+        .footer-column p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px; 
+            color: #fff;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            margin-top: 30px;
+        }
+        
+        /* Alertas */
+        .alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--gradient-blue);
+            color: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            z-index: 3000;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s, bounce 0.5s 0.5s;
+        }
+        
+        .alert h3 {
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .alert p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-20px) translateX(-50%);}
+            60% {transform: translateY(-10px) translateX(-50%);}
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .typed-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                width: 250px;
+                height: 100vh;
+                flex-direction: column;
+                padding: 30px;
+                transition: all 0.5s ease;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            
+            .typed-text {
+                font-size: 1.3rem;
+            }
+            
+            .about-text, .about-image {
+                flex: 100%;
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .contact-info, .contact-form {
+                flex: 100%;
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .modal-content {
+                padding: 25px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .typed-text {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .service-item, .portfolio-item {
+                min-width: 100%;
+            }
+            
+            .footer-column {
+                flex: 100%;
+            }
+        }
+
+        .differentials {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #ffffff, #f1f5f9);
+        }
+        
+        .differential-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        
+        .video-container video {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(30, 64, 175, 0.2), rgba(59, 130, 246, 0.2));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+        }
+        
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+        
+        .play-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #1e40af;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-icon:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .simulator-cta {
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        .simulator-cta h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .simulator-cta p {
+            font-size: 1.1rem;
+            color: #65748b;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-blue);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.6);
+            background: var(--gradient-blue-reverse);
+        }
+        
+        .cta-button:hover:before {
+            left: 100%;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            width: 100%;
+        }
+        
+        .feature-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-description {
+            color: #65748b;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .differentials {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .video-container {
+                border-radius: 8px;
+            }
+            
+            .simulator-cta h3 {
+                font-size: 1.5rem;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Estilo para a digitação infinita */
+        .typing-container {
+            margin: 30px auto;
+            text-align: center;
+            max-width: 800px;
+        }
+        
+        .typing-text {
+            font-size: 1.2rem;
+            color: #1e40af;
+            min-height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2rem;
+            background-color: #1e40af;
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+
+        .social-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #1a4f8b, #3b82f6);
+            overflow: hidden;
+        }
+        
+        .social-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50%;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .color-bubble {
+            position: absolute;
+            filter: blur(150px);
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        
+        .color-bubble:nth-child(1) {
+            background: #ff359b;
+            width: 600px;
+            height: 600px;
+            top: -350px;
+            left: 10%;
+        }
+        
+        .color-bubble:nth-child(2) {
+            background: #00d2ff;
+            width: 500px;
+            height: 500px;
+            bottom: -150px;
+            left: 15%;
+        }
+        
+        .color-bubble:nth-child(3) {
+            background: #fffd87;
+            width: 500px;
+            height: 500px;
+            bottom: -150px;
+            right: 10%;
+        }
+        
+        .social-container {
+            position: relative;
+            display: flex;
+            z-index: 2;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-title {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+        }
+        
+        .social-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-list li {
+            position: relative;
+            list-style: none;
+            margin: 20px;
+        }
+        
+        .social-list li a {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 2em;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 45px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(2px);
+            transition: 0.5s;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-list li a:hover {
+            transform: translateY(-20px);
+        }
+        
+        .social-list li a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 100%;
+            display: block;
+            background: rgba(255, 255, 255, 0.5);
+            transform: skewX(45deg) translateX(150px);
+            transition: 0.5s;
+        }
+        
+        .social-list li a:hover::before {
+            transform: skewX(45deg) translateX(-150px);
+        }
+        
+        .social-text {
+            color: white;
+            margin-top: 40px;
+            font-size: 1.2rem;
+            text-align: center;
+            max-width: 600px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .social-list li {
+                margin: 15px;
+            }
+            
+            .social-list li a {
+                width: 70px;
+                height: 70px;
+                font-size: 1.7em;
+            }
+            
+            .social-title {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+            
+            .color-bubble:nth-child(1) {
+                width: 400px;
+                height: 400px;
+                top: -250px;
+            }
+            
+            .color-bubble:nth-child(2),
+            .color-bubble:nth-child(3) {
+                width: 350px;
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .social-list {
+                flex-direction: column;
+            }
+            
+            .social-list li {
+                margin: 15px 0;
+            }
+            
+            .social-title {
+                font-size: 1.8rem;
+            }
+            
+            .social-text {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+        }
+
+        /* ESTILOS PARA A SEÇÃO DIVIDIDA COM SCROLL */
+.wrapper,
+.content {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.content {
+  overflow-x: hidden;
+}
+
+.content .section {
+  width: 100%;
+  height: 100vh;
+}
+
+.content .section.hero {
+  background-image: url(https://images.unsplash.com/photo-1589848315097-ba7b903cc1cc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 10%;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #ff6b6b;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+  background: #ff5252;
+  transform: translateY(-3px);
+}
+
+.image-container {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  perspective: 500px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
+
+/* Container geral da seção */
+/* Estilos do Slider de Marcas */
+/* Estilos do Slider de Marcas */
+.brand-logo-slider {
+            width: 100%;
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #1e293b, #0f172a);
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .brand-logo-slider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(66, 153, 225, 0.1), transparent 40%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .section-heading {
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            color: #f8fafc;
+        }
+
+        .section-heading span {
+            color: #3b82f6;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+        }
+
+        /* Slider personalizado */
+        .custom-slider {
+            position: relative;
+            overflow: hidden;
+            padding: 30px 0;
+            width: 100%;
+        }
+
+        .slider-track {
+            display: flex;
+            animation: scroll 40s linear infinite;
+            width: calc(200px * 22);
+        }
+
+        .slide-item {
+            width: 200px;
+            height: 120px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 12px;
+            margin: 0 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .slide-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .slide-item img {
+            max-width: 100%;
+            max-height: 70px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(0.3);
+            transition: filter 0.3s ease;
+        }
+
+        .slide-item:hover img {
+            filter: grayscale(0);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-200px * 11));
+            }
+        }
+
+        /* Efeito de fade nas bordas */
+        .custom-slider::before,
+        .custom-slider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 100px;
+            z-index: 3;
+        }
+
+        .custom-slider::before {
+            left: 0;
+            background: linear-gradient(to right, #1e293b, transparent);
+        }
+
+        .custom-slider::after {
+            right: 0;
+            background: linear-gradient(to left, #1e293b, transparent);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .section-heading {
+                font-size: 2.4rem;
+            }
+            
+            .slide-item {
+                width: 180px;
+                height: 110px;
+            }
+            
+            .slider-track {
+                width: calc(180px * 22);
+            }
+            
+            @keyframes scroll {
+                100% {
+                    transform: translateX(calc(-180px * 11));
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            .brand-logo-slider {
+                padding: 60px 0;
+            }
+            
+            .section-heading {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            
+            .slide-item {
+                width: 150px;
+                height: 100px;
+                margin: 0 10px;
+            }
+            
+            .slider-track {
+                width: calc(150px * 22);
+            }
+            
+            @keyframes scroll {
+                100% {
+                    transform: translateX(calc(-150px * 11));
+                }
+            }
+        }
+
+        @media (max-width: 576px) {
+            .slide-item {
+                width: 130px;
+                height: 90px;
+                margin: 0 8px;
+            }
+            
+            .slider-track {
+                width: calc(130px * 22);
+            }
+            
+            @keyframes scroll {
+                100% {
+                    transform: translateX(calc(-130px * 11));
+                }
+            }
+            
+            .custom-slider::before,
+            .custom-slider::after {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header e Navegação -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">TEJ HOLDING</a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#view">View</a></li>
+                <li><a href="simulador.html">Simulador</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <li><a href="#social-connect">Social</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Seção Hero com Vídeo -->
+    <section id="home" class="hero">
+        <div class="video-wrap">
+            <video autoplay loop muted class="custom-video" poster="">
+                <source src="video.mp4" type="video/mp4">
+                Seu navegador não suporta a tag de vídeo.
+            </video>
+        </div>
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h1>TEJ HOLDING LLC</h1>
+            <div class="typed-text" id="typed-text"></div>
+            <a href="#about" class="btn">Saiba Mais</a>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Nós</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3> TEJ HOLDING | Ecossistema Global</h3>
+                    <p>A TEJ HOLDING LLC é uma empresa global e diversificada que atua em múltiplos setores com foco em inovação, tecnologias avançadas, sustentabilidade e crescimento estratégico. Nossa missão é criar soluções inteligentes que conectam pessoas, empresas e comunidades, trazendo o futuro para o presente.</p>
+                    <p>Com um portfólio dinâmico de negócios e investimentos, exploramos continuamente novas oportunidades em finanças digitais, blockchain, inteligência artificial e impacto social. Nosso compromisso é gerar valor sustentável para clientes, acionistas e para a sociedade como um todo.</p>
+                    <a href="#view" class="btn">Nossos Diferenciais</a>
+                </div>                
+                <div class="about-image">
+                    <img src="./tej_future.jpg" alt="future">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Diferenciais -->
+    <section id="view" class="differentials">
+        <div class="container">
+            <div class="section-title">
+                <h2>View</h2>
+            </div>
+            
+            <div class="differential-content">
+                <div class="video-container">
+                    <video id="differential-video" autoplay loop muted playsinline>
+                        <source src="https://cdn.pixabay.com/video/2024/03/15/204306-923909642_large.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos HTML5.
+                    </video>
+                    <div class="video-overlay">
+                        <div class="play-icon" id="play-button">❚❚</div>
+                    </div>
+                </div>
+                
+                <div class="simulator-cta">
+                    <h3>Experimente nosso Simulador</h3>
+                    <p>Descubra como nossas soluções podem transformar seus resultados financeiros com nossa ferramenta interativa e intuitiva.</p>
+                    <a href="simulador.html" class="cta-button">Acessar Simulador</a>
+                </div>
+            </div>
+            
+            <!-- Área de texto com digitação infinita -->
+            <div class="typing-container">
+                <div class="typing-text" id="typing-text">
+                    <span id="typing-content"></span><span class="cursor"></span>
+                </div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Inovação Constante</h3>
+                    <p class="feature-description">Estamos sempre atualizando nossas ferramentas com as mais recentes tecnologias do mercado.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="feature-title">Simplicidade</h3>
+                    <p class="feature-description">Interface intuitiva e fácil de usar, mesmo para quem não tem experiência técnica.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Segurança</h3>
+                    <p class="feature-description">Seus dados estão protegidos com os mais avançados protocolos de segurança.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Serviços -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços</h2>
+            </div>
+            <div class="services-grid">
+    
+                <div class="service-item">
+                    <img src="./tej_bank.jpg" alt="TEJ Bank" class="service-image">
+                    <div class="service-overlay">
+                        <h3>TEJ Bank</h3>
+                        <p>Banco digital multimoeda, com soluções inteligentes para finanças globais e blindagem patrimonial.</p>
+                        <button class="btn service-modal-btn" data-service="1">Saiba Mais</button>
+                    </div>
+                </div>
+    
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Consultoria & Jurídico" class="service-image">
+                    <div class="service-overlay">
+                        <h3>Consultoria & Jurídico</h3>
+                        <p>Assessoria global em imigração, estruturação societária, tributária e compliance com tecnologia de ponta.</p>
+                        <button class="btn service-modal-btn" data-service="2">Saiba Mais</button>
+                    </div>
+                </div>
+    
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="TEJ Educação" class="service-image">
+                    <div class="service-overlay">
+                        <h3>TEJ Educação</h3>
+                        <p>Plataforma de conhecimento em finanças, tecnologia e inteligência artificial para todas as gerações.</p>
+                        <button class="btn service-modal-btn" data-service="3">Saiba Mais</button>
+                    </div>
+                </div>
+    
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Social & Sustentabilidade" class="service-image">
+                    <div class="service-overlay">
+                        <h3>Social & Sustentabilidade</h3>
+                        <p>Projetos de impacto social e ambiental com inclusão financeira, blockchain e economia circular.</p>
+                        <button class="btn service-modal-btn" data-service="4">Saiba Mais</button>
+                    </div>
+                </div>
+    
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Mercado de Capitais" class="service-image">
+                    <div class="service-overlay">
+                        <h3>Mercado de Capitais</h3>
+                        <p>Expansão global da TEJ HOLDING com abertura de capital na NASDAQ e fundos de investimento próprios.</p>
+                        <button class="btn service-modal-btn" data-service="5">Saiba Mais</button>
+                    </div>
+                </div>
+    
+                <div class="service-item">
+                    <img src="./blockchain.jpg" alt="Blockchain & Criptomoeda" class="service-image">
+                    <div class="service-overlay">
+                        <h3>Blockchain & Criptomoeda</h3>
+                        <p>Blockchain própria e criptomoeda sustentável, integrando finanças, educação e impacto social.</p>
+                        <button class="btn service-modal-btn" data-service="6">Saiba Mais</button>
+                    </div>
+                </div>
+    
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Inteligência Artificial" class="service-image">
+                    <div class="service-overlay">
+                        <h3>Inteligência Artificial</h3>
+                        <p>Desenvolvimento de IAs próprias aplicadas a finanças, jurídico, educação e gestão corporativa.</p>
+                        <button class="btn service-modal-btn" data-service="7">Saiba Mais</button>
+                    </div>
+                </div>
+    
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Energia Renovável" class="service-image">
+                    <div class="service-overlay">
+                        <h3>Energia Renovável</h3>
+                        <p>Investimentos em energia limpa: solar, eólica, biomassa e armazenamento sustentável.</p>
+                        <button class="btn service-modal-btn" data-service="8">Saiba Mais</button>
+                    </div>
+                </div>
+    
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Segurança Digital" class="service-image">
+                    <div class="service-overlay">
+                        <h3>Segurança Digital</h3>
+                        <p>Soluções de cibersegurança para proteção de dados, sistemas críticos e operações empresariais.</p>
+                        <button class="btn service-modal-btn" data-service="9">Saiba Mais</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </section>    
+
+    <!-- Seção Portfólio -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nosso Portfólio</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://tejbank.com/logo-ub.jpg" alt="Segurança Digital" class="service-image">
+                    <div class="service-overlay">
+                        <h3>TEJ Bank</h3>
+                        <p>Banco digital multimoeda com foco em câmbio fiduciário e cripto. Soluções inteligentes para finanças globais, gestão digital de ativos e blindagem patrimonial.</p>
+                        <button class="btn service-modal-btn" data-service="10">Saiba Mais</button>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://tejbank.com/logo-ub.jpg" alt="Segurança Digital" class="service-image">
+                    <div class="service-overlay">
+                        <h3>TEJ Pague</h3>
+                        <p>Pague suas contas do Brasil de qualquer lugar do mundo. Aceitamos dólar e criptomoedas. Quite suas faturas de água, luz, internet e boletos em poucos cliques. Rápido, seguro e transparente.</p>
+                        <button class="btn service-modal-btn" data-service="11">Saiba Mais</button>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://tejbank.com/logo-ub.jpg" alt="Segurança Digital" class="service-image">
+                    <div class="service-overlay">
+                        <h3>Instituto TEJ</h3>
+                        <p>Iniciativa global voltada a educação financeira, inovação tecnológica e projetos de impacto social em diferentes países. O objetivo é conectar pessoas, conhecimento e oportunidades sem fronteiras.</p>
+                        <button class="btn service-modal-btn" data-service="12">Saiba Mais</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO PARCEIROS -->
+    <section class="brand-logo-slider" id="partners">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading">Our <span>Partners</span></h2>
+            </div>
+            
+            <!-- Slider personalizado -->
+            <div class="custom-slider">
+                <div class="slider-track">
+                    <!-- Itens duplicados para criar o efeito de loop contínuo -->
+                    <div class="slide-item">
+                        <img src="data:image/png;base64,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" alt="Binance Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://polygonscan.com/assets/poly/images/svg/logos/logo-polygonscan-light.svg" alt="PolygonScan Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://centraldoimigrante.com/wp-content/uploads/2024/10/log_site_ofpb2.fw_.png" alt="CDI Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://www.geckoterminal.com/_next/static/media/logo_dark.6b1547fe.png" alt="Gecko Terminal Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://www.mintme.com/build/images/logo.b4a08b8f..svg" alt="MintMe Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://explorer.bitquery.io/assets/bitquery_logo-7351ee1075ec7890f83c1f079f7c7c7f489e1ff7be24bbd3c52e2b28d1b38548.png" alt="BitQuery Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://docs.metamask.io/img/metamask-logo-dark.svg" alt="MetaMask Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFwAXAMBEQACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAABAYHBQECA//EAD4QAAEDAwAFCAUJCQAAAAAAAAEAAgMEBREGEiExgQcTQVFhcpGhFBVxk9EWIiMyU1VigrIXJDNzkqKxwtL/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAwQFBgIB/8QAKxEAAgIBAQcCBgMAAAAAAAAAAAECAwQRBRITITFBUVJhFBUicYHBkaGx/9oADAMBAAIRAxEAPwDlrpjgwgCAIAgCAIAgCAIAgCAIAgCAIAgCAID1ATobNdJ4mywW6rkjeMteyFxBHYcKN3Vp6OSJ44t8lqoPT7H36hvH3XW+4d8F8+Iq9SPvwmR6H/BEq6Spo5BFVwSwSFusGyMLTjr2+wr3GcZrWL1IrKp1vSa0Z+C9HgIAgCAIAgCAICRQ0sldWwUkX15pBG3sycZXmc1CLk+xJVW7JqC7m8UsEdNTRU8I1Y4mBjR1ADAXONtvVnbQioRUV0R+h2BfD0YjpRcfWt9q6oHMevqR9xuweO/iugx6+HWkcdm3ca+UjkqYqBAEAQE632e43Jrn0FHLO1hw5zRsB6sqOd1dfKT0J6sa25awjqTPkpfvuufy+K8fFU+om+X5PoI9XYbtRtYamhlZru1WDYS49QA2ngvsciqXRkc8O+C+qJAljfDI6OVjmPacOa9pBHtBUqaa1RXlFxej6lw5Mbd6Rd5a57fmUrMN77tn+M+IVHaFmkFDya+x6d6x2Pt/pqSyDpDh6Z3L1Zo9VStdiWRvNR952zPAZPBT41fEtSKeddwqJPv0/kxdb5x54gCAID1AjbtF7aLVY6SlIxIGa0nfO0/Dguevs4ljkdniU8GmMDqqIsnFpR6dpJVVJGYqGMU0ffdh0h8NQeKml9NSj55lWH13yl6eX56v9FU5U7bqy0tzY3Y8GGUjrG1v+3gFd2fZ1r/JlbZp5xtX2LJoHbfV2jlOXNxLUfTP/Nu8sKrl2b9r9jR2dTwsdeXzLEqxeMz5UrlztfTW5h+bA3nJB+J27wH6lq7Pr0i5+TntsXazVS7FHWiYh4gCAIDuaGW31npFSxObmOM89J7G7fM4HFV8uzh1P3Luz6eLkRXZczaBsCwTryPcauOgoZ6ub+HDGXu7cDcvUIuUlFHiyarg5PsRtHqR9HaoWTj94kzNOeuR51neZxwXq2W9N6dCPGg4VpPr1f3ZE0shjr6Smtj26zqypY0fha06zz/S0jiveO3GTmuyI8yKsiqn3a/rmzuNaGtDWjAGwAKAtpaHzLIyKN0kjg1jAXOcegDeiWvI+NpLVmEXaudcrlU1r8gzSFwB6B0DgMBdHVDhwUTisi122ym+5EXshCAIAvoNM5LrbzVBUXF4+dO/m4+63f4n9Kx8+zWah4Oj2PTu1ux9y8qgbJTeUm7OordTUsRHOzyh5BGRqsIO3jq+au4NW/Jt9v2ZW1cjh1qK6t/4Wm3VcddQwVcP1Jow8dmRuVScXGTi+xpVzVkFNdznUo9O0jqqjfHQxinj/mOw5/lqDxUkvprS88yCH13uXp5fnq/0dpQloq/KHcfQdHpIWuxJVu5kd3e7y2cVaw69+1PwZ207uHjtd3yMjW4coeIAgCA+4o3yyMjjbrPe4NaB0k7AEbSWrPUYuT0Ru1oomW2201HHuhjDc9Z6TxOSucsm5ycn3O1prVVaguxMXglMb05uXrHSOoLXZip/oGfl3/3ZW5h17lS9+Zye07uLkPwuR0tF9NWWe0mhqqeSYxkmFzXDGDtweoZzuz7FFkYbsnvRZYw9pqmrcktdOh27NphZLfQNilqJnzuc6SZ4gOHPcS5xHZk+AVezEunLVLkXado41cNHLn35dyd8v7D9rP7kqP4G7wTfNcbz/RRtNdII79cInUweKWBmqzXGCSd58h4LRxKHTF73VmLtHLWTNbvRFcVozggCAICz8nlu9O0hjlcMxUjedd3tzfPbwVPOs3atPJp7Kp4l+8+iNeWKdSc7SC4C12arrNmtHGdTPS47G+ZCkqhxJqJBk28KqU/BhhJJJcSSTtJ6V0RxbeoQ+HiAIAgCAIAgPUBcdC9JbVYKGZlTHUvqZpNZzo2AjVA2DaR2niqGXj23TTj0RsbPzaMatqWurLF+0az/AGNb7tv/AEqvwF3sX/nGP7lc010tp75RwUtCydkYk15DIAM4GANhPWfJWsTFlVJymZ+0NoQyIKFf5Kcr5kBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAf/2Q==" alt="Nasdaq Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://trustwallet.com/assets/images/media/assets/TWT.png" alt="Trust Wallet Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="data:image/png;base64,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" alt="Exodus Logo">
+                    </div>
+                    
+                    <!-- Itens duplicados para criar o efeito contínuo -->
+                    <div class="slide-item">
+                        <img src="data:image/png;base64,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" alt="Binance Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://polygonscan.com/assets/poly/images/svg/logos/logo-polygonscan-light.svg" alt="PolygonScan Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://centraldoimigrante.com/wp-content/uploads/2024/10/log_site_ofpb2.fw_.png" alt="CDI Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://www.geckoterminal.com/_next/static/media/logo_dark.6b1547fe.png" alt="Gecko Terminal Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://www.mintme.com/build/images/logo.b4a08b8f..svg" alt="MintMe Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://explorer.bitquery.io/assets/bitquery_logo-7351ee1075ec7890f83c1f079f7c7c7f489e1ff7be24bbd3c52e2b28d1b38548.png" alt="BitQuery Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://docs.metamask.io/img/metamask-logo-dark.svg" alt="MetaMask Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="data:image/jpeg;base64,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" alt="Nasdaq Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="https://trustwallet.com/assets/images/media/assets/TWT.png" alt="Trust Wallet Logo">
+                    </div>
+                    <div class="slide-item">
+                        <img src="data:image/png;base64,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" alt="Exodus Logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+      
+
+    <!-- Seção Contato -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entre em Contato</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Informações de Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> TEJ HOLDING LLC. Delaware, United State</p>
+                    <p><i class="fas fa-envelope"></i> Contat Information</p>
+                    <p><i class="fas fa-headphones"></i>Support (24/7)</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+                        <a href="https://web.telegram.org/k/"><i class="fab fa-telegram"></i></a>
+                        <a href="https://youtube.com"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm" action="https://formsubmit.co/support@tejbank.com" method="POST">
+                        <!-- Desativa o captcha -->
+                        <input type="hidden" name="_captcha" value="false">
+                    
+                        <!-- Redireciona para página de sucesso -->
+                        <input type="hidden" name="_next" value="https://tej.finance/thankyou.html">
+                    
+                        <!-- Redireciona para página de erro -->
+                        <input type="hidden" name="_error" value="https://tej.finance/error.html">
+                    
+                        <!-- Campos obrigatórios com name correto -->
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                        </div>
+                    
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="social-connect" class="social-section">
+        <div class="color-bubble"></div>
+        <div class="color-bubble"></div>
+        <div class="color-bubble"></div>
+        
+        <div class="social-container">
+            <h2 class="social-title">Conecte-se Conosco</h2>
+            
+            <ul class="social-list">
+                <li>
+                    <a href="https://youtube.com">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://instagram.com">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://facebook.com">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tiktok.com">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://x.com">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                </li>
+            </ul>
+            
+            <p class="social-text">
+                Siga nossas redes sociais para ficar por dentro de todas as novidades, 
+                atualizações e conteúdos exclusivos que preparamos para você!
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TEJ HOLDING LLC</h3>
+                    <p>Ecossistema Global • Inovação • Sustentabilidade • Expansão e Blindagem Patrimonial.</p>
+                    <p>Nossa missão é criar soluções sustentáveis que beneficiem tanto o presente quanto o futuro.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#differentials">View</a></li>
+                        <li><a href="simulador.html">Simulador</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#social-connect">Social</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Serviços</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"class="service-modal-btn" data-service="2">Consultoria & jurídico</a></li>
+                        <li><a href="#"class="service-modal-btn" data-service="4">Social e Sustentabilidade</a></li>
+                        <li><a href="#"class="service-modal-btn" data-service="5">Mercado de Capitais</a></li>
+                        <li><a href="#"class="service-modal-btn" data-service="6">Blockchain & Criptomoeda</a></li>
+                        <li><a href="#"class="service-modal-btn" data-service="7">Inteligência Artificia</a></li>
+                        <li><a href="#"class="service-modal-btn" data-service="8">Energia Renovável</a></li>
+                        <li><a href="#"class="service-modal-btn" data-service="9">Segurança Digital</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>TEJ</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://tejbank.com">TEJ Bank</a></li>
+                        <li><a href="#"class="service-modal-btn" data-service="11">TEJ Pague</a></li>
+                        <li><a href="#"class="service-modal-btn" data-service="3">TEJ Educação</a></li>
+                        <li><a href="#"class="service-modal-btn" data-service="12">Instituto TEJ</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Políticas Oficiais</a></li>
+                        <li><a href="#contact">Seja Parceiro</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TEJ HOLDING LLC. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para Serviços -->
+    <div class="modal" id="serviceModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">Fechar</button>
+            <div class="modal-header">
+                <h2 id="modal-service-title">Título do Serviço</h2>
+            </div>
+            <div class="modal-body" id="modal-service-content">
+                <!-- Conteúdo será preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Alerta de Confirmação -->
+    <div class="alert" id="successAlert">
+        <h3>Sucesso!</h3>
+        <p id="alertMessage">Operação realizada com sucesso.</p>
+        <button class="btn" id="closeAlert">Fechar</button>
+    </div>
+
+    <script>
+        // Dados dos serviços
+        const services = {
+    1: {
+        title: "TEJ Bank",
+        content: `
+            <p>O TEJ Bank é a divisão de serviços bancários digitais da TEJ HOLDING, com foco em inovação e integração entre moedas tradicionais e ativos digitais. Criamos soluções financeiras inteligentes para indivíduos e empresas.</p>
+            
+            <h3>Produtos e Serviços</h3>
+            <ul>
+                <li>Conta Digital Multimoeda (base USDT)</li>
+                <li>Cartão Global (Físico & Virtual)</li>
+                <li>Blindagem Patrimonial Inteligente</li>
+                <li>Expansão Patrimonial Estratégica</li>
+                <li>Crédito Colateralizado em Criptoativos</li>
+                <li>Remessas Globais via Blockchain</li>
+                <li>Assistente Financeiro com IA</li>
+            </ul>
+            
+            <h3>Tecnologia e Segurança</h3>
+            <p>Utilizamos blockchain e protocolos de segurança avançados, garantindo máxima proteção dos ativos e dados de nossos clientes. Transparência, inovação e solidez em um único ecossistema bancário.</p>
+
+              <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="https://tejbank.com" target="_blank" 
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Acessar TEJ Bank
+            </a>
+            </div>
+        `
+    },
+    2: {
+        title: "Consultoria & Jurídico",
+        content: `
+            <p>A TEJ CONSULTORIA & JURÍDICO oferece suporte completo a empresas e pessoas, unindo expertise internacional, inovação tecnológica e segurança jurídica.</p>
+            
+            <h3>Serviços</h3>
+            <ul>
+                <li>Assessoria Migratória para Imigrantes (EUA)</li>
+                <li>Passaportes & Vistos (Work, Study, Residency)</li>
+                <li>Estruturação Societária e Bancária Internacional</li>
+                <li>Planejamento Tributário Global</li>
+                <li>Tokenização de Ativos Empresariais</li>
+                <li>Compliance Empresarial & Financeiro (KYC/AML com IA)</li>
+            </ul>
+            
+            <h3>Diferenciais</h3>
+            <p>Integramos consultoria estratégica, legal e tecnológica, assegurando soluções seguras, escaláveis e alinhadas ao crescimento global.</p>
+
+              <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="#contact" target="_blank" 
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Aderir
+            </a>
+            </div>
+        `
+    },
+    3: {
+        title: "TEJ Educação (Academia TEJ)",
+        content: `
+            <p>A Academia TEJ é um hub de conhecimento voltado para a democratização da educação financeira e tecnológica, com foco em crianças, jovens, empresas e investidores.</p>
+            
+            <h3>Programas</h3>
+            <ul>
+                <li>Educação Financeira Interativa</li>
+                <li>Inteligência Financeira para Crianças e Jovens</li>
+                <li>Plataforma Gamificada de Simulação de Investimentos</li>
+                <li>Cursos em Finanças, Cripto e Blockchain</li>
+                <li>Educação Corporativa Global</li>
+                <li>Conteúdos sobre IA Financeira</li>
+            </ul>
+            
+            <h3>Impacto</h3>
+            <p>Preparar a nova geração para dominar finanças digitais, inteligência artificial e tecnologias emergentes, trazendo o futuro para o presente.</p>
+
+              <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="#contact" target="_blank"
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Aderir
+            </a>
+            </div>
+        `
+    },
+    4: {
+        title: "TEJ Social & Sustentabilidade",
+        content: `
+            <p>A TEJ HOLDING tem forte compromisso social, apoiando projetos que unem inclusão, inovação e sustentabilidade em escala global.</p>
+            
+            <h3>Iniciativas</h3>
+            <ul>
+                <li>Inclusão Financeira em Países em Desenvolvimento</li>
+                <li>Apoio a Comunidades de Imigrantes</li>
+                <li>Blockchain para Projetos Sociais (doações transparentes)</li>
+                <li>Programas de Reciclagem & Economia Circular</li>
+                <li>Fundo TEJ de Impacto Social Global</li>
+                <li>Projetos de Renda Sustentável para Futuras Gerações</li>
+            </ul>
+            
+            <h3>Propósito</h3>
+            <p>Gerar impacto positivo através da tecnologia, criando soluções que transformam comunidades e constroem oportunidades sustentáveis.</p>
+
+              <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="#contact" target="_blank"
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Aderir
+            </a>
+            </div>
+        `
+    },
+    5: {
+        title: "Mercado de Capitais",
+        content: `
+            <p>A TEJ HOLDING prepara-se para competir globalmente no mercado de capitais, conectando inovação financeira e oportunidades de investimento.</p>
+            
+            <h3>Atuação</h3>
+            <ul>
+                <li>Abertura de Capital (IPO) na NASDAQ</li>
+                <li>Fundo de Investimento Próprio TEJ</li>
+                <li>Captação Global para Expansão & Startups</li>
+            </ul>
+            
+            <h3>Visão</h3>
+            <p>Levar a TEJ HOLDING ao patamar de empresa pública, oferecendo oportunidades de investimento global, transparência e crescimento sustentável.</p>
+
+              <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="#contact" target="_blank"
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Aderir
+            </a>
+            </div>
+        `
+    },
+    6: {
+        title: "TEJ Blockchain & Criptomoeda",
+        content: `
+            <p>Estamos desenvolvendo nossa própria blockchain e criptomoeda sustentável, criando um ecossistema único para finanças, impacto social e educação.</p>
+            
+            <h3>Recursos</h3>
+            <ul>
+                <li>Blockchain Proprietária com Escalabilidade & Segurança</li>
+                <li>Criptomoeda Sustentável (mineração com energia renovável)</li>
+                <li>Token TEJ (pareado à criptomoeda, usado em DeFi e governança)</li>
+                <li>Incentivo à Educação, Reciclagem e Descarte Correto de Orgânicos</li>
+                <li>Geração de Renda Sustentável para Comunidades</li>
+            </ul>
+            
+            <h3>Objetivo</h3>
+            <p>Unir inovação tecnológica e responsabilidade ambiental, criando um ativo digital com propósito social e valor econômico real.</p>
+
+              <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="#contact" target="_blank"
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Aderir
+            </a>
+            </div>
+        `
+    },
+    7: {
+        title: "Inteligência Artificial (IA TEJ)",
+        content: `
+            <p>A TEJ desenvolve IAs próprias para múltiplos setores, integrando tecnologia de ponta em finanças, jurídico, educação e gestão corporativa.</p>
+            
+            <h3>Soluções</h3>
+            <ul>
+                <li>IA Financeira (gestão patrimonial e investimentos)</li>
+                <li>IA Jurídica (migração, vistos, contratos, compliance)</li>
+                <li>IA Educacional (ensino personalizado em finanças)</li>
+                <li>IA Corporativa (tesouraria, análise de risco, ESG e logística)</li>
+            </ul>
+            
+            <h3>Diferencial</h3>
+            <p>Criamos IAs específicas para cada setor, garantindo precisão, eficiência e inovação com foco em resultados tangíveis.</p>
+
+              <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="#contact" target="_blank"
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Aderir
+            </a>
+            </div>
+        `
+    },
+    8: {
+        title: "Energia Renovável",
+        content: `
+            <p>A TEJ HOLDING investe em energia limpa, conectando inovação, sustentabilidade e rentabilidade para acelerar a transição energética.</p>
+            
+            <h3>Focos de Atuação</h3>
+            <ul>
+                <li>Parques solares fotovoltaicos</li>
+                <li>Usinas eólicas onshore & offshore</li>
+                <li>Projetos de biomassa & biogás</li>
+                <li>Pequenas centrais hidrelétricas (PCHs)</li>
+                <li>Sistemas de armazenamento de energia</li>
+            </ul>
+            
+            <h3>Impacto</h3>
+            <p>Projetos que combinam rentabilidade com responsabilidade ambiental, evitando milhares de toneladas de CO₂ e fornecendo energia limpa para milhões de pessoas.</p>
+
+              <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="#contact" target="_blank"
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Aderir
+            </a>
+            </div>
+        `
+    },
+    9: {
+        title: "Segurança Digital",
+        content: `
+            <p>Oferecemos soluções completas de cibersegurança para proteger dados, sistemas e operações em um mundo cada vez mais digital.</p>
+            
+            <h3>Serviços</h3>
+            <ul>
+                <li>Proteção de dados & privacidade</li>
+                <li>Segurança de infraestrutura crítica</li>
+                <li>Defesa contra ransomware & malware</li>
+                <li>Gestão de identidade & acesso</li>
+                <li>Resposta a incidentes & recuperação</li>
+            </ul>
+            
+            <h3>Diferencial</h3>
+            <p>Combinamos tecnologia de ponta, monitoramento proativo e especialistas globais para proteger empresas e pessoas contra ameaças digitais.</p>
+
+              <div style="width: 100%; text-align: center; margin-top: 20px;">
+           <a href="#contact" target="_blank"
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Aderir
+            </a>
+            </div>
+        `
+    },
+    10: {
+    title: "TEJ Bank",
+    content: `
+        <p>O <strong>TEJ Bank</strong> é a solução financeira digital da TEJ, voltada para câmbio fiduciário e criptomoedas. 
+        Com segurança e agilidade, você converte dólares em <em>USDT</em> e outras criptomoedas de forma simples e prática.</p>
+        
+        <h3>Como Funciona</h3>
+        <ul>
+            <li>Envie depósitos para sua conta TEJ Bank</li>
+            <li>Depósitos e Saques <em>FIDUCIÁRIOS OU EM CRIPTOMOEDAS</em></li>
+            <li>Depósitos <em>FIDUCIÁRIOS</em> são convertidos automaticamente para <em>USDT</em></li>
+            <li>Converta seu saldo em <em>USDT</em> ou outras criptomoedas</li>
+            <li>Gerencie seus ativos de forma digital, rápida e segura</li>
+            <li>Fundo de Investimento TEJ Bank, com rentabilidades de 1% a.m.</li>
+            <li>Blindagem Patrimonial de forma segura e digital</li>
+        </ul>
+        
+        <h3>Diferencial</h3>
+        <p>O TEJ Bank não é um banco tradicional. Nosso foco se consiste em  blindagem patrimonial , câmbio fiduciário para cripto, 
+        swap de criptomoedas oferecendo taxas competitivas, rapidez e transparência via blockchain.</p>
+        
+        <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="https://tejbank.com" target="_blank" 
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Acessar TEJ Bank
+            </a>
+        </div>
+    `
+    },
+    11: {
+    title: "TEJ Pague",
+    content: `
+        <p>O <strong>TEJ Pague</strong> é o serviço que conecta brasileiros nos Estados Unidos ao pagamento de contas no Brasil. 
+        De forma rápida e segura, você envia recursos em dólar e nós realizamos o pagamento de contas como água, luz, internet, boletos , faturas e muito mais.</p>
+        
+        <h3>Como Funciona</h3>
+        <ul>
+            <li>Envie os valores em dólar para a TEJ via Bank of American ou em Criptomoeda</li>
+            <li>Realizamos a conversão para reais com câmbio seguro</li>
+            <li>Pagamos suas contas no Brasil de forma ágil e transparente</li>
+            <li>Envie (PIX) para amigos e familiares no Brasil em minutos</li>
+        </ul>
+        
+        <h3>Diferencial</h3>
+        <p>Com o TEJ Pague você tem praticidade, confiança e suporte especializado. 
+        Sua família no Brasil fica tranquila e você resolve tudo diretamente dos EUA.</p>
+        
+        <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="https://wa.me/55SEUNUMERO" target="_blank" 
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Acessar TEJ Pague
+            </a>
+        </div>
+    `
+   },
+   12: {
+    title: "Instituto TEJ",
+    content: `
+        <p>O <strong>Instituto TEJ</strong> nasce com o propósito de promover impacto social, 
+        oferecendo educação financeira, apoio à comunidade brasileira no exterior e incentivo à inovação tecnológica.</p>
+        
+        <h3>Áreas de Atuação</h3>
+        <ul>
+            <li><strong>Educação Financeira</strong>: cursos e treinamentos para brasileiros nos EUA e no Brasil</li>
+            <li><strong>Apoio Social</strong>: projetos voltados para imigrantes e famílias em situação de vulnerabilidade</li>
+            <li><strong>Inovação</strong>: incentivo a pesquisas e startups ligadas a câmbio, cripto e finanças digitais</li>
+        </ul>
+        
+        <h3>Diferencial</h3>
+        <p>O Instituto TEJ conecta conhecimento, tecnologia e responsabilidade social, 
+        reforçando o compromisso da TEJ com pessoas, comunidades e o futuro.</p>
+        
+        <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <a href="#contact" target="_blank"
+               style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                Contribuir
+            </a>
+        </div>
+    `
+}
+
+};
+
+
+        // Efeito de digitação infinito no hero
+        document.addEventListener('DOMContentLoaded', function() {
+            const typedTextElement = document.getElementById('typed-text');
+            const texts = [
+                "INOVAÇÕES INTELIGENTES PARA ESTA E PARA AS FUTURAS GERAÇÕES.",
+                "SOLUÇÕES SUSTENTÁVEIS PARA UM FUTURO MELHOR.",
+                "TECNOLOGIA AVANÇADA PARA RESULTADOS EXCEPCIONAIS."
+            ];
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 100;
+            
+            function type() {
+                const currentText = texts[textIndex];
+                
+                if (isDeleting) {
+                    // Removendo caracteres
+                    typedTextElement.innerHTML = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                    typingSpeed = 50; // Velocidade mais rápida para deletar
+                } else {
+                    // Adicionando caracteres
+                    typedTextElement.innerHTML = currentText.substring(0, charIndex + 1);
+                    charIndex++;
+                    typingSpeed = 100; // Velocidade normal para digitar
+                }
+                
+                // Verificando se terminou de digitar ou deletar
+                if (!isDeleting && charIndex === currentText.length) {
+                    isDeleting = true;
+                    typingSpeed = 1000; // Pausa no final do texto
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length; // Avança para o próximo texto
+                    typingSpeed = 500; // Pausa antes de começar a digitar
+                }
+                
+                setTimeout(type, typingSpeed);
+            }
+            
+            // Iniciar o efeito de digitação
+            type();
+            
+            // Efeito de digitação infinita na seção de diferenciais
+            const typingContent = document.getElementById('typing-content');
+            const differentialTexts = [
+           "Soluções inovadoras para maximizar seus resultados financeiros.",
+           "Expansão e blindagem patrimonial com estratégias inovadoras.",
+           "Ecossistema completo que agrega valor e fortalece sua empresa."
+            ];
+
+            let diffTextIndex = 0;
+            let diffCharIndex = 0;
+            let diffIsDeleting = false;
+            let diffTypingSpeed = 100;
+            
+            function typeDifferential() {
+                const currentText = differentialTexts[diffTextIndex];
+                
+                if (diffIsDeleting) {
+                    // Removendo caracteres
+                    typingContent.textContent = currentText.substring(0, diffCharIndex - 1);
+                    diffCharIndex--;
+                    diffTypingSpeed = 50;
+                } else {
+                    // Adicionando caracteres
+                    typingContent.textContent = currentText.substring(0, diffCharIndex + 1);
+                    diffCharIndex++;
+                    diffTypingSpeed = 100;
+                }
+                
+                // Verificando se terminou de digitar ou deletar
+                if (!diffIsDeleting && diffCharIndex === currentText.length) {
+                    diffIsDeleting = true;
+                    diffTypingSpeed = 1000;
+                } else if (diffIsDeleting && diffCharIndex === 0) {
+                    diffIsDeleting = false;
+                    diffTextIndex = (diffTextIndex + 1) % differentialTexts.length;
+                    diffTypingSpeed = 500;
+                }
+                
+                setTimeout(typeDifferential, diffTypingSpeed);
+            }
+            
+            // Iniciar o efeito de digitação na seção de diferenciais
+            typeDifferential();
+            
+            // Controle de vídeo para a seção de diferenciais
+            const differentialVideo = document.getElementById('differential-video');
+            const playButton = document.getElementById('play-button');
+            
+            // Inicialmente, o vídeo está em autoplay and muted, então o ícone deve ser de pausa
+            playButton.innerHTML = '❚❚';
+            
+            playButton.addEventListener('click', function() {
+                if (differentialVideo.paused) {
+                    differentialVideo.play();
+                    playButton.innerHTML = '❚❚';
+                } else {
+                    differentialVideo.pause();
+                    playButton.innerHTML = '▶';
+                }
+            });
+            
+            // Pausar vídeo quando não estiver visível para melhor performance
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!differentialVideo.paused) {
+                            playButton.innerHTML = '❚❚';
+                        }
+                    } else {
+                        if (!differentialVideo.paused) {
+                            playButton.innerHTML = '▶';
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(differentialVideo);
+            
+            // Menu mobile toggle
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // Fechar menu ao clicar em um link
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Header scroll effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Obrigado por sua mensagem! Entraremos em contato em breve.');
+                    contactForm.reset();
+                });
+            }
+            
+            // Modal de serviços
+            const serviceModal = document.getElementById('serviceModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalTitle = document.getElementById('modal-service-title');
+            const modalContent = document.getElementById('modal-service-content');
+            const serviceButtons = document.querySelectorAll('.service-modal-btn');
+            
+            serviceButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const serviceId = this.getAttribute('data-service');
+                    modalTitle.textContent = services[serviceId].title;
+                    modalContent.innerHTML = services[serviceId].content;
+                    serviceModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                serviceModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Fechar modal clicando fora do conteúdo
+            window.addEventListener('click', function(event) {
+                if (event.target === serviceModal) {
+                    serviceModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Fechar alerta
+            const closeAlert = document.getElementById('closeAlert');
+            const successAlert = document.getElementById('successAlert');
+            
+            if (closeAlert && successAlert) {
+                closeAlert.addEventListener('click', function() {
+                    successAlert.style.display = 'none';
+                });
+            }
+        });
+
+         // Inicializar o ScrollTrigger
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Aguardar o carregamento da página
+  window.addEventListener("load", () => {
+    // Configurar a animação do ScrollTrigger
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".wrapper",
+        start: "top top",
+        end: "+=150%",
+        pin: true,
+        scrub: true,
+        markers: false // Defina como true para ver os marcadores de debug
+      }
+    })
+    .to(".image-container img", {
+      scale: 2,
+      z: 350,
+      transformOrigin: "center center",
+      ease: "power1.inOut"
+    })
+    .to(".section.hero", {
+      scale: 1.1,
+      transformOrigin: "center center",
+      ease: "power1.inOut"
+    }, "<");
+  });
+    </script>
+</script>
+   
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+</body>
+</html>

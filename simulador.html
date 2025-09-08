@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulador Wallet — Depósito • Câmbio • Saque</title>
+  <style>
+    /* ====== Tema escuro estilo Binance ====== */
+    :root{
+      --bg:#0b0e11;         /* fundo app */
+      --panel:#131722;      /* cards */
+      --panel-2:#1e2329;    /* campos/input */
+      --text:#eaecef;       /* primário */
+      --muted:#a1a7bb;      /* secundário */
+      --accent:#fcd535;     /* amarelo Binance */
+      --border:#2b3139;     /* linhas */
+      --good:#0ecb81;       /* verde */
+      --bad:#f6465d;        /* vermelho */
+      --radius:14px;
+      --shadow: 0 2px 16px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial}
+
+    .wrap{max-width:1100px;margin-inline:auto;padding:20px}
+
+    /* Top bar */
+    .top{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:16px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .dot{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#ffd84d)}
+    h1{margin:0;font-size:clamp(16px,2.2vw,20px);font-weight:600}
+
+    /* Layout */
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    @media(max-width:960px){ .grid{grid-template-columns:1fr} }
+
+    /* Card */
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card .hd{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .card .bd{padding:16px}
+
+    /* Saldos */
+    .balances{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    @media(max-width:960px){.balances{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:560px){.balances{grid-template-columns:repeat(2,1fr)}}
+    .bal{background:var(--panel-2);border:1px solid var(--border);border-radius:12px;padding:10px}
+    .bal .sym{display:flex;align-items:center;gap:8px;font-weight:600}
+    .bal .amt{margin-top:6px;font-weight:700;font-size:16px}
+    .bal .eq{color:var(--muted);font-size:12px}
+    .bal .icon{width:16px;height:16px;border-radius:50%}
+
+    /* Saldo principal em USDT */
+    .main-balance{background:var(--panel-2);border:1px solid var(--accent);border-radius:12px;padding:15px;margin-bottom:16px;text-align:center}
+    .main-balance .label{color:var(--muted);font-size:14px;margin-bottom:6px}
+    .main-balance .value{font-size:24px;font-weight:700;color:var(--accent)}
+
+    /* Ações (Depósito/Câmbio/Saque) */
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
+    .btn-tab{border:1px solid var(--border);background:transparent;color:var(--text);padding:10px 14px;border-radius:999px;cursor:pointer}
+    .btn-tab.active{background:var(--accent);color:#111}
+
+    /* Form panes */
+    .pane{display:none}
+    .pane.active{display:block}
+
+    /* Campos estilo Binance */
+    .field{background:var(--panel-2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+    .left{display:flex;align-items:center;gap:10px}
+    .assetBadge{display:flex;align-items:center;gap:6px;background:#0d1117;border:1px solid var(--border);padding:6px 10px;border-radius:999px}
+    .assetBadge .icon{width:16px;height:16px;border-radius:50%}
+    .assetBadge b{font-size:13px}
+    input[type="number"], input[type="text"]{background:transparent;border:none;outline:none;color:var(--text);font-size:18px;width:100%}
+
+    /* Custom select com ícone */
+    .select{position:relative}
+    .selectBtn{display:flex;align-items:center;gap:8px;background:#0d1117;border:1px solid var(--border);padding:8px 12px;border-radius:12px;cursor:pointer}
+    .selectMenu{position:absolute;z-index:10;inset:auto 0 0 0;transform:translateY(100%);background:var(--panel);border:1px solid var(--border);border-radius:12px;display:none;max-height:260px;overflow:auto}
+    .select.open .selectMenu{display:block}
+    .opt{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer}
+    .opt:hover{background:#0d1117}
+    .opt .icon{width:16px;height:16px;border-radius:50%}
+
+    .rate{color:var(--muted);font-size:12px;margin-bottom:10px}
+
+    .cta{width:100%;background:var(--accent);color:#111;border:none;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer}
+    .cta:disabled{opacity:.6;cursor:not-allowed}
+
+    .hint{color:var(--muted);font-size:12px;margin-top:8px}
+
+    .histRow{padding:10px 0;border-bottom:1px solid var(--border)}
+    .histRow .t{font-weight:600}
+    .histRow .m{color:var(--muted);font-size:12px}
+    
+    /* Loading states */
+    .loading{opacity:0.7;pointer-events:none}
+
+    .cta-button {padding: 12px 30px;font-size: 1rem;}
+
+    .simulator-cta {
+            text-align: center;
+        }
+        
+        .simulator-cta h3 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .simulator-cta p {
+            font-size: 1.1rem;
+            color: white;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #1a2a6c, #2c3e99);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(26, 42, 108, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 42, 108, 0.4);
+        }
+        
+        .cta-button:hover:before {
+            left: 100%;
+        }
+
+        .tej-section {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: "Arial Black", sans-serif;
+  overflow: hidden;
+  animation: change 5s infinite alternate;
+}
+
+.tej-section .container {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  text-align: center;
+  user-select: none;
+}
+
+.tej-section .first,
+.tej-section .second {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  font-size: clamp(2rem, 12vmin, 10rem);
+  line-height: 1.2;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.tej-section .first {
+  color: black;
+  z-index: 1;
+  animation: move 15s infinite alternate;
+}
+
+.tej-section .second {
+  color: white;
+  animation: move 15s ease-out infinite alternate-reverse;
+  will-change: transform, opacity;
+}
+
+@keyframes move {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes change {
+  from { background-color: white; }
+  to   { background-color: black; }
+}
+
+@media (max-width: 768px) {
+  .tej-section .first,
+  .tej-section .second {
+    font-size: clamp(1.8rem, 8vw, 4rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .tej-section .first,
+  .tej-section .second {
+    font-size: clamp(1.5rem, 10vw, 3rem);
+  }
+}
+
+
+  </style>
+  <!-- Bibliotecas GSAP para animações -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <section id="future" class="tej-section">
+    <div class="container">
+      <div class="first">FUTURE</div>
+      <div class="second">TEJ HOLDING</div>
+    </div>
+  </section>
+
+  <div class="simulator-cta">
+    <h3>Experimente nosso Simulador</h3>
+    <p>Nossa ferramenta é prática e intuitiva.</p>
+    <a href="index.html" class="cta-button">Voltar</a>
+ </div>
+  
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><span class="dot" aria-hidden="true"></span><h1>Simulador Wallet — TEJ BANK</h1></div>
+      <div style="color:var(--muted)">Cotações em tempo real • Sem taxas</div>
+    </div>
+
+    <div class="grid">
+      <!-- Coluna 1: Carteira e Ações -->
+      <section class="card">
+        <div class="hd">
+          <div style="font-weight:600">Carteira</div>
+          <div id="lastUpdated" style="color:var(--muted)">—</div>
+        </div>
+        <div class="bd">
+          <!-- Saldo principal em USDT -->
+          <div class="main-balance">
+            <div class="label">SALDO PRINCIPAL EM USDT</div>
+            <div class="value" id="main-usdt-balance">0.00</div>
+          </div>
+          
+          <!-- Saldos -->
+          <div class="balances" id="balances"></div>
+          <div class="hint">DEPÓSITOS FIDUCIÁRIOS (BRL / USD / EUR) SÃO CONVERTIDOS AUTOMATICAMENTE PARA (USDT).</div>
+        </div>
+      </section>
+
+      <!-- Coluna 2: Painel de operação (Depósito, Câmbio, Saque) -->
+      <section class="card">
+        <div class="hd" style="justify-content:flex-start">
+          <div class="actions">
+            <button class="btn-tab active" data-pane="deposito">Depósito</button>
+            <button class="btn-tab" data-pane="cambio">Câmbio</button>
+            <button class="btn-tab" data-pane="saque">Saque</button>
+          </div>
+        </div>
+        <div class="bd">
+          <!-- Painel Depósito: FIAT -> USDT -->
+          <div class="pane active" id="pane-deposito">
+            <div class="field">
+              <div class="left">
+                <div class="select" id="sel-depAsset"></div>
+              </div>
+              <input id="depAmt" type="number" min="0" step="any" placeholder="0" />
+            </div>
+            <div class="rate" id="depRate">1 USDT ≈ — BRL</div>
+            <button class="cta" id="btnDeposit">Depositar (converte para USDT)</button>
+          </div>
+
+          <!-- Painel Câmbio: USDT -> (BTC/ETH/BNB/SOL) -->
+          <div class="pane" id="pane-cambio">
+            <div class="field">
+              <div class="left">
+                <div class="assetBadge"><img class="icon" src="https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661" alt="USDT"/><b>USDT</b></div>
+              </div>
+              <input id="swapAmtUSDT" type="number" min="0" step="any" placeholder="0" />
+            </div>
+            <div class="field">
+              <div class="left">
+                <div class="select" id="sel-crypto"></div>
+              </div>
+              <input id="swapAmtCrypto" type="number" min="0" step="any" placeholder="0" />
+            </div>
+            <div class="rate" id="swapRate">1 BTC ≈ — USDT</div>
+            <button class="cta" id="btnSwap">Converter USDT → Cripto</button>
+          </div>
+
+          <!-- Painel Saque: (a) Cripto  (b) Fiduciário) -->
+          <div class="pane" id="pane-saque">
+            <div class="hint" style="margin-bottom:8px">Escolha Saque de Cripto <i>ou</i> Saque Fiduciário</div>
+
+            <div style="margin-bottom:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <button class="btn-tab active" id="tabWdCrypto">Cripto</button>
+              <button class="btn-tab" id="tabWdFiat">Fiduciário</button>
+            </div>
+
+            <!-- Saque Cripto -->
+            <div id="wdCryptoBox">
+              <div class="field">
+                <div class="left"><div class="select" id="sel-wdAsset"></div></div>
+                <input id="wdAmt" type="number" min="0" step="any" placeholder="0" />
+              </div>
+              <div class="field">
+                <div class="left"><div class="assetBadge"><img class="icon" src="https://cdn-icons-png.flaticon.com/128/18820/18820271.png" alt="NET"/><b>Rede</b></div></div>
+                <input id="wdNet" type="text" placeholder="Ex: Bitcoin, Ethereum, BSC, Solana..." />
+              </div>
+              <div class="field">
+                <div class="left"><div class="assetBadge"><img class="icon" src="https://cdn-icons-png.flaticon.com/128/1969/1969142.png" alt="ADDR"/><b>Endereço</b></div></div>
+                <input id="wdAddr" type="text" placeholder="Hash FICTÍCIO 0x742d3Cc634..." />
+              </div>
+              <button class="cta" id="btnWdCrypto">Solicitar Saque (Cripto)</button>
+            </div>
+
+            <!-- Saque Fiat -->
+            <div id="wdFiatBox" style="display:none; margin-top:12px">
+              <div class="field">
+                <div class="left"><div class="select" id="sel-wdFrom"></div></div>
+                <input id="wdFromAmt" type="number" min="0" step="any" placeholder="0" />
+              </div>
+              <div class="field">
+                <div class="left"><div class="select" id="sel-wdFiat"></div></div>
+                <input id="wdFiatAmtOut" type="number" placeholder="Valor estimado (auto)" disabled />
+              </div>
+              <div class="rate" id="wdFiatRate">1 USDT ≈ — BRL</div>
+              <button class="cta" id="btnWdFiat">Solicitar Saque (Fiat)</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:18px">
+      <div class="hd"><div style="font-weight:600">Histórico</div><div style="color:var(--muted)">Local (navegador)</div></div>
+      <div class="bd" id="history"></div>
+    </section>
+  </div>
+
+  <script>
+    // ==============================
+    // Ícones (CryptoLogos) – aproximação do padrão Binance
+    // ==============================
+    const ICON = {
+      BRL: 'https://public.bnbstatic.com/image/currencies/BRL.png',
+      USD: 'https://public.bnbstatic.com/image/currencies/USD.png',
+      EUR: 'https://public.bnbstatic.com/image/currencies/EUR.png',
+      USDT:'https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661',
+      BTC: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
+      ETH: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png',
+      BNB: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png',
+      SOL: 'https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png'
+    };
+
+    const FIAT = ['BRL','USD','EUR'];
+    const CRYPTO = ['USDT','BTC','ETH','BNB','SOL'];
+    const ALL_ASSETS = [...FIAT, ...CRYPTO];
+
+    const state = {
+      balances: { USDT: 1000, BTC:0, ETH:0, BNB:0, SOL:0 }, // Saldo inicial em USDT (principal)
+      rates: { // preços em USD
+        USD_BRL: 5.20, USD_EUR: 0.85,
+        BTC_USD: 50000, ETH_USD: 3000, BNB_USD: 500, SOL_USD: 100, USDT_USD: 1
+      },
+      updated: null,
+      history: []
+    };
+
+    // ===== Helpers =====
+    const $ = s => document.querySelector(s);
+    const fmt = (n, d=8) => Number(n||0).toLocaleString('pt-BR',{maximumFractionDigits:d});
+
+    function usdPrice(asset){
+      switch(asset){
+        case 'USD': return 1;
+        case 'BRL': return 1/(state.rates.USD_BRL||0);
+        case 'EUR': return 1/(state.rates.USD_EUR||0);
+        case 'USDT': return state.rates.USDT_USD || 1;
+        case 'BTC': return state.rates.BTC_USD||0;
+        case 'ETH': return state.rates.ETH_USD||0;
+        case 'BNB': return state.rates.BNB_USD||0;
+        case 'SOL': return state.rates.SOL_USD||0;
+        default: return 0;
+      }
+    }
+    function convert(amount, from, to){
+      if(!amount) return 0;
+      const usdFrom = usdPrice(from); const usdTo = usdPrice(to);
+      return (amount * usdFrom) / usdTo;
+    }
+
+    function addHistory(type,text){
+      state.history.unshift({ts:new Date().toLocaleString('pt-BR'), type, text});
+      renderHistory();
+    }
+
+    // ====== Custom select (com ícone) ======
+    function makeSelect(el, items, value){
+      el.className = 'select';
+      el.innerHTML = `
+        <div class="selectBtn"><img class=\"icon\" src=\"${ICON[value]}\"/><b>${value}</b></div>
+        <div class="selectMenu">
+          ${items.map(sym=>`<div class=\"opt\" data-val=\"${sym}\"><img class=\"icon\" src=\"${ICON[sym]}\"/><b>${sym}</b></div>`).join('')}
+        </div>
+      `;
+      const btn = el.querySelector('.selectBtn');
+      const menu = el.querySelector('.selectMenu');
+      el.addEventListener('click', (e)=>{
+        el.classList.toggle('open');
+        const opt = e.target.closest('.opt');
+        if(opt){
+          const val = opt.dataset.val;
+          btn.innerHTML = `<img class=\"icon\" src=\"${ICON[val]}\"/><b>${val}</b>`;
+          el.value = val;
+          el.dispatchEvent(new Event('change'));
+        }
+      });
+      document.addEventListener('click', (e)=>{ if(!el.contains(e.target)) el.classList.remove('open'); });
+      el.value = value; // store
+    }
+
+    // ===== Render Saldos =====
+    function renderBalances(){
+      const order = ['USDT','BTC','ETH','BNB','SOL'];
+      const html = order.map(sym=>{
+        const amt = state.balances[sym]||0;
+        const usd = usdPrice(sym)*amt;
+        return `<div class=\"bal\">
+          <div class=\"sym\"><img class=\"icon\" src=\"${ICON[sym]}\"/> ${sym}</div>
+          <div class=\"amt\">${fmt(amt, sym==='USDT'?2:8)} ${sym}</div>
+          <div class=\"eq\">≈ US$ ${fmt(usd,2)}</div>
+        </div>`
+      }).join('');
+      $('#balances').innerHTML = html;
+      
+      // Atualizar saldo principal em USDT
+      $('#main-usdt-balance').textContent = fmt(state.balances.USDT, 2);
+    }
+
+    function renderHistory(){
+      if(!state.history.length){ $('#history').innerHTML = '<div class="hint">Sem eventos ainda.</div>'; return; }
+      $('#history').innerHTML = state.history.map(h=>`<div class="histRow"><div class="t">${h.type}</div><div class="m">${h.ts}</div><div>${h.text}</div></div>`).join('');
+    }
+
+    // ===== Painel: Depósito =====
+    makeSelect($('#sel-depAsset'), ALL_ASSETS, 'BRL');
+    $('#sel-depAsset').addEventListener('change', updateDepRate);
+    function updateDepRate(){
+      const cur = $('#sel-depAsset').value;
+      const one = convert(1, 'USDT', cur); // 1 USDT em FIAT/CRYPTO
+      $('#depRate').textContent = `1 USDT ≈ ${fmt(one,2)} ${cur}`;
+      $('#depAmt').placeholder = `1 ${cur} = ${fmt(convert(1, cur, 'USDT'), 2)} USDT`;
+    }
+    $('#btnDeposit').addEventListener('click', ()=>{
+      const cur = $('#sel-depAsset').value; 
+      const amt = parseFloat($('#depAmt').value||'0');
+      if(!(amt>0)) return alert('Informe um valor válido.');
+      
+      // converte qualquer ativo em USDT
+      const priceUSDTinAsset = convert(1,'USDT',cur);
+      const usdt = amt / priceUSDTinAsset;
+      state.balances.USDT += usdt;
+      addHistory('Depósito', `${fmt(amt,2)} ${cur} → ${fmt(usdt,6)} USDT`);
+      $('#depAmt').value='';
+      renderBalances();
+    });
+
+    // ===== Painel: Câmbio (USDT -> Cripto) =====
+    makeSelect($('#sel-crypto'), ['BTC','ETH','BNB','SOL'], 'BTC');
+    function updateSwapRate(){
+      const to = $('#sel-crypto').value;
+      const price = convert(1, to, 'USDT'); // 1 CRIPTO em USDT
+      $('#swapRate').textContent = `1 ${to} ≈ ${fmt(price,2)} USDT`;
+      $('#swapAmtUSDT').placeholder = `1 ${to} = ${fmt(price, 2)} USDT`;
+    }
+    $('#sel-crypto').addEventListener('change', ()=>{ updateSwapRate(); syncSwapFromUSDT(); });
+
+    // sync inputs
+    function syncSwapFromUSDT(){
+      const amt = parseFloat($('#swapAmtUSDT').value||'0');
+      const to = $('#sel-crypto').value;
+      const toAmt = convert(amt, 'USDT', to);
+      $('#swapAmtCrypto').value = toAmt ? toAmt : '';
+    }
+    function syncSwapFromCrypto(){
+      const amt = parseFloat($('#swapAmtCrypto').value||'0');
+      const to = $('#sel-crypto').value;
+      const usdtAmt = convert(amt, to, 'USDT');
+      $('#swapAmtUSDT').value = usdtAmt ? usdtAmt : '';
+    }
+    $('#swapAmtUSDT').addEventListener('input', syncSwapFromUSDT);
+    $('#swapAmtCrypto').addEventListener('input', syncSwapFromCrypto);
+
+    $('#btnSwap').addEventListener('click', ()=>{
+      const usdt = parseFloat($('#swapAmtUSDT').value||'0');
+      const to = $('#sel-crypto').value;
+      if(!(usdt>0)) return alert('Informe um valor válido em USDT.');
+      if(usdt > state.balances.USDT) return alert('Saldo USDT insuficiente.');
+      const received = convert(usdt, 'USDT', to);
+      state.balances.USDT -= usdt;
+      state.balances[to] = (state.balances[to]||0) + received;
+      addHistory('Câmbio', `${fmt(usdt,2)} USDT → ${fmt(received,8)} ${to}`);
+      $('#swapAmtUSDT').value=''; $('#swapAmtCrypto').value='';
+      renderBalances();
+    });
+
+    // ===== Painel: Saque =====
+    makeSelect($('#sel-wdAsset'), ['USDT','BTC','ETH','BNB','SOL'], 'BTC');
+    makeSelect($('#sel-wdFrom'), ['USDT','BTC','ETH','BNB','SOL'], 'USDT');
+    makeSelect($('#sel-wdFiat'), FIAT, 'BRL');
+
+    // alternância cripto/fiat
+    $('#tabWdCrypto').addEventListener('click', ()=>{ $('#tabWdCrypto').classList.add('active'); $('#tabWdFiat').classList.remove('active'); $('#wdCryptoBox').style.display='block'; $('#wdFiatBox').style.display='none'; });
+    $('#tabWdFiat').addEventListener('click', ()=>{ $('#tabWdFiat').classList.add('active'); $('#tabWdCrypto').classList.remove('active'); $('#wdFiatBox').style.display='block'; $('#wdCryptoBox').style.display='none'; calcWdFiatOut();});
+
+    function calcWdFiatOut(){
+      const src = $('#sel-wdFrom').value; const f = $('#sel-wdFiat').value; const amt = parseFloat($('#wdFromAmt').value||'0');
+      const val = convert(amt, src, f);
+      $('#wdFiatAmtOut').value = val ? fmt(val,2) : '';
+      $('#wdFiatRate').textContent = `1 ${src} ≈ ${fmt(convert(1, src, f), 6)} ${f}`;
+      $('#wdFromAmt').placeholder = `1 ${src} = ${fmt(convert(1, src, f), 6)} ${f}`;
+    }
+    $('#sel-wdFrom').addEventListener('change', calcWdFiatOut);
+    $('#sel-wdFiat').addEventListener('change', calcWdFiatOut);
+    $('#wdFromAmt').addEventListener('input', calcWdFiatOut);
+
+    $('#btnWdCrypto').addEventListener('click', ()=>{
+      const a = $('#sel-wdAsset').value; const amt = parseFloat($('#wdAmt').value||'0');
+      const net = ($('#wdNet').value||'').trim(); const addr = ($('#wdAddr').value||'').trim();
+      if(!(amt>0)) return alert('Informe quantidade.');
+      if(amt > (state.balances[a]||0)) return alert('Saldo insuficiente.');
+      if(addr.length < 8) return alert('Endereço fictício muito curto.');
+      state.balances[a] -= amt;
+      addHistory('Saque Cripto', `${fmt(amt,8)} ${a} via ${net||'rede não informada'} → ${addr}`);
+      $('#wdAmt').value=''; $('#wdAddr').value='';
+      renderBalances();
+    });
+
+    $('#btnWdFiat').addEventListener('click', ()=>{
+      const src = $('#sel-wdFrom').value; const f = $('#sel-wdFiat').value; const amt = parseFloat($('#wdFromAmt').value||'0');
+      if(!(amt>0)) return alert('Informe quantidade.');
+      if(amt > (state.balances[src]||0)) return alert('Saldo insuficiente.');
+      const out = convert(amt, src, f);
+      state.balances[src] -= amt;
+      addHistory('Saque Fiduciário', `${fmt(amt,8)} ${src} → ${fmt(out,2)} ${f}`);
+      $('#wdFromAmt').value=''; $('#wdFiatAmtOut').value='';
+      renderBalances();
+    });
+
+    // ===== Tabs principais =====
+    document.querySelectorAll('.btn-tab[data-pane]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.btn-tab[data-pane]').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const id = btn.dataset.pane;
+        document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+        document.getElementById('pane-'+id).classList.add('active');
+      });
+    });
+
+    // ===== Cotações =====
+    async function loadRates(){
+      try{
+        // API alternativa para cotações - usando CoinGecko como fallback
+        const cgRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,tether&vs_currencies=usd,brl,eur');
+        const cg = await cgRes.json();
+        
+        // Atualizar taxas
+        if (cg.bitcoin) {
+          state.rates.BTC_USD = cg.bitcoin.usd || 50000;
+          state.rates.USD_BRL = cg.bitcoin.brl / cg.bitcoin.usd || 5.20;
+          state.rates.USD_EUR = cg.bitcoin.eur / cg.bitcoin.usd || 0.85;
+        }
+        if (cg.ethereum) state.rates.ETH_USD = cg.ethereum.usd || 3000;
+        if (cg.binancecoin) state.rates.BNB_USD = cg.binancecoin.usd || 500;
+        if (cg.solana) state.rates.SOL_USD = cg.solana.usd || 100;
+        if (cg.tether) state.rates.USDT_USD = cg.tether.usd || 1;
+
+        state.updated = new Date();
+        $('#lastUpdated').textContent = `Atualizado: ${state.updated.toLocaleTimeString('pt-BR')}`;
+
+        renderBalances();
+        updateDepRate();
+        updateSwapRate();
+        calcWdFiatOut();
+      }catch(e){ 
+        console.error("Erro ao carregar cotações:", e);
+        // Usar valores padrão em caso de erro
+        state.rates = {
+          USD_BRL: 5.20, USD_EUR: 0.85,
+          BTC_USD: 50000, ETH_USD: 3000, BNB_USD: 500, SOL_USD: 100, USDT_USD: 1
+        };
+        $('#lastUpdated').textContent = "Cotações offline - usando valores padrão";
+      }
+    }
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function() {
+      // Renderizar saldos iniciais
+      renderBalances();
+      renderHistory();
+      
+      // Configurar eventos
+      setupEventListeners();
+      
+      // Carregar cotações
+      loadRates();
+      
+      // Atualizar placeholders
+      updateDepRate();
+      updateSwapRate();
+      calcWdFiatOut();
+    });
+
+    function setupEventListeners() {
+      // Adicionar event listeners para os inputs
+      $('#depAmt').addEventListener('input', function() {
+        const cur = $('#sel-depAsset').value;
+        const amt = parseFloat(this.value || '0');
+        const usdt = convert(amt, cur, 'USDT');
+        $('#depRate').textContent = `${fmt(amt, 2)} ${cur} ≈ ${fmt(usdt, 6)} USDT`;
+      });
+      
+      $('#swapAmtUSDT').addEventListener('input', function() {
+        const to = $('#sel-crypto').value;
+        const amt = parseFloat(this.value || '0');
+        const crypto = convert(amt, 'USDT', to);
+        $('#swapRate').textContent = `${fmt(amt, 2)} USDT ≈ ${fmt(crypto, 8)} ${to}`;
+      });
+      
+      $('#swapAmtCrypto').addEventListener('input', function() {
+        const to = $('#sel-crypto').value;
+        const amt = parseFloat(this.value || '0');
+        const usdt = convert(amt, to, 'USDT');
+        $('#swapRate').textContent = `${fmt(amt, 8)} ${to} ≈ ${fmt(usdt, 2)} USDT`;
+      });
+    }
+
+    // Atualizar cotações a cada 30 segundos
+    setInterval(loadRates, 30000);
+  </script>
+
+</body>
+</html>

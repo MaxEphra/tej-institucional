@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falha no envio</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #3a0d0d, #5a1c1c);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px 20px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    h1 {
+      font-size: 2rem;
+      color: #ff4d4d;
+      margin-bottom: 15px;
+    }
+    p { margin-bottom: 25px; line-height: 1.6; }
+    .btn {
+      background: #ff4d4d;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #e04343; }
+    @media (max-width: 600px) { h1 { font-size: 1.6rem; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Falha no envio</h1>
+    <p>Ocorreu um problema ao enviar sua mensagem.  
+       Por favor, tente novamente mais tarde.</p>
+    <a href="https://tej.finance" class="btn">Voltar ao site</a>
+  </div>
+</body>
+</html>
